@@ -1,6 +1,5 @@
 # Multibot
 
-## Overview
 Multibot is a powerful AI-driven chatbot framework that integrates multiple AI models to provide intelligent and dynamic responses. It allows seamless interaction with different AI models, making it adaptable for various use cases such as customer support, knowledge retrieval, and interactive conversations.
 
 <p align="center">
