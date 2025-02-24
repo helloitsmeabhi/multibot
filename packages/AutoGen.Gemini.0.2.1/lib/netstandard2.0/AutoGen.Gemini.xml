@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoGen.Gemini</name>
+    </assembly>
+    <members>
+        <member name="M:AutoGen.Gemini.Extension.FunctionContractExtension.ToFunctionDeclaration(AutoGen.Core.FunctionContract)">
+            <summary>
+            Convert a <see cref="T:AutoGen.Core.FunctionContract"/> to a <see cref="T:Google.Cloud.AIPlatform.V1.FunctionDeclaration"/> that can be used in gpt funciton call.
+            </summary>
+        </member>
+        <member name="M:AutoGen.Gemini.GeminiChatAgent.#ctor(AutoGen.Gemini.IGeminiClient,System.String,System.String,System.String,Google.Cloud.AIPlatform.V1.ToolConfig,Google.Cloud.AIPlatform.V1.Tool[],Google.Protobuf.Collections.RepeatedField{Google.Cloud.AIPlatform.V1.SafetySetting},System.String)">
+            <summary>
+            Create <see cref="T:AutoGen.Gemini.GeminiChatAgent"/> that connects to Gemini.
+            </summary>
+            <param name="client">the gemini client to use. e.g. <see cref="T:AutoGen.Gemini.VertexGeminiClient"/> </param>
+            <param name="name">agent name</param>
+            <param name="model">the model id. It needs to be in the format of 
+            'projects/{project}/locations/{location}/publishers/{provider}/models/{model}' if the <paramref name="client"/> is <see cref="T:AutoGen.Gemini.VertexGeminiClient"/></param>
+            <param name="systemMessage">system message</param>
+            <param name="toolConfig">tool config</param>
+            <param name="tools">tools</param>
+            <param name="safetySettings">safety settings</param>
+            <param name="responseMimeType">response mime type, available values are ['application/json', 'text/plain'], default is 'text/plain'</param>
+        </member>
+        <member name="M:AutoGen.Gemini.GeminiChatAgent.#ctor(System.String,System.String,System.String,System.String,Google.Cloud.AIPlatform.V1.ToolConfig,Google.Cloud.AIPlatform.V1.Tool[],Google.Protobuf.Collections.RepeatedField{Google.Cloud.AIPlatform.V1.SafetySetting},System.String)">
+            <summary>
+            Create <see cref="T:AutoGen.Gemini.GeminiChatAgent"/> that connects to Gemini using <see cref="T:AutoGen.Gemini.GoogleGeminiClient"/>
+            </summary>
+            <param name="name">agent name</param>
+            <param name="model">the name of gemini model, e.g. gemini-1.5-flash-001</param>
+            <param name="apiKey">google gemini api key</param>
+            <param name="systemMessage">system message</param>
+            <param name="toolConfig">tool config</param>
+            <param name="tools">tools</param>
+            <param name="safetySettings"></param>
+            <param name="responseMimeType">response mime type, available values are ['application/json', 'text/plain'], default is 'text/plain'</param>
+            /// <example>
+            <![CDATA[
+            [!code-csharp[Chat_With_Google_Gemini](~/../sample/AutoGen.Gemini.Sample/Chat_With_Google_Gemini.cs?name=Create_Gemini_Agent)]
+            ]]>
+            </example>
+        </member>
+        <member name="M:AutoGen.Gemini.GeminiChatAgent.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,Google.Cloud.AIPlatform.V1.ToolConfig,Google.Cloud.AIPlatform.V1.Tool[],Google.Protobuf.Collections.RepeatedField{Google.Cloud.AIPlatform.V1.SafetySetting},System.String)">
+            <summary>
+            Create <see cref="T:AutoGen.Gemini.GeminiChatAgent"/> that connects to Vertex AI.
+            </summary>
+            <param name="name">agent name</param>
+            <param name="systemMessage">system message</param>
+            <param name="model">the name of gemini model, e.g. gemini-1.5-flash-001</param>
+            <param name="project">project id</param>
+            <param name="location">model location</param>
+            <param name="provider">model provider, default is 'google'</param>
+            <param name="toolConfig">tool config</param>
+            <param name="tools">tools</param>
+            <param name="safetySettings"></param>
+            <param name="responseMimeType">response mime type, available values are ['application/json', 'text/plain'], default is 'text/plain'</param>
+            <example>
+            <![CDATA[
+            [!code-csharp[Chat_With_Vertex_Gemini](~/../sample/AutoGen.Gemini.Sample/Chat_With_Vertex_Gemini.cs?name=Create_Gemini_Agent)]
+            ]]>
+            </example>
+        </member>
+        <member name="M:AutoGen.Gemini.GeminiAgentExtension.RegisterMessageConnector(AutoGen.Gemini.GeminiChatAgent,AutoGen.Gemini.GeminiMessageConnector)">
+            <summary>
+            Register an <see cref="T:AutoGen.Gemini.GeminiMessageConnector"/> to the <see cref="T:AutoGen.Gemini.GeminiChatAgent"/>
+            </summary>
+            <param name="connector">the connector to use. If null, a new instance of <see cref="T:AutoGen.Gemini.GeminiMessageConnector"/> will be created.</param>
+        </member>
+        <member name="M:AutoGen.Gemini.GeminiAgentExtension.RegisterMessageConnector(AutoGen.Core.MiddlewareStreamingAgent{AutoGen.Gemini.GeminiChatAgent},AutoGen.Gemini.GeminiMessageConnector)">
+            <summary>
+            Register an <see cref="T:AutoGen.Gemini.GeminiMessageConnector"/> to the <see cref="T:AutoGen.Core.MiddlewareAgent`1"/> where T is <see cref="T:AutoGen.Gemini.GeminiChatAgent"/>
+            </summary>
+            <param name="connector">the connector to use. If null, a new instance of <see cref="T:AutoGen.Gemini.GeminiMessageConnector"/> will be created.</param>
+        </member>
+        <member name="F:AutoGen.Gemini.GeminiMessageConnector.strictMode">
+            <summary>
+            if true, the connector will throw an exception if it encounters an unsupport message type.
+            Otherwise, it will ignore processing the message and return the message as is.
+            </summary>
+        </member>
+        <member name="M:AutoGen.Gemini.GeminiMessageConnector.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AutoGen.Gemini.GeminiMessageConnector"/> class.
+            </summary>
+            <param name="strictMode">whether to throw an exception if it encounters an unsupport message type.
+            If true, the connector will throw an exception if it encounters an unsupport message type.
+            If false, it will ignore processing the message and return the message as is.</param>
+        </member>
+    </members>
+</doc>
