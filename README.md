@@ -37,7 +37,7 @@ Ensure you have the following installed:
    ```
 
 ## Usage
-### Sending a Message
+### Sending a Message.
 ```csharp
 var response = await geminiAgent.SendAsync(userMessage);
 AddMessageToChat("Bot", response);
