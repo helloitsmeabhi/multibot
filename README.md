@@ -50,7 +50,8 @@ using Markdig;
 var markdown = Markdown.ToHtml(userMessage);
 ```
 
-
+### UI Customization
+Modify `AddMessageToChat` method to change message appearance.
 
 
 
